@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight App</title>
+</head>
+<body>
+    <h1>Flights</h1>
+    <ul>
+        {% for flight in Flights %}
+            <li><a href="{% url 'flight_def' flight.id %}">{{flight}}</a></li>
+        {% empty %}
+            <li>No Flights</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Flight {{Flight.id}}</title>
+    </head>
+    <body>
+        <h1>Information about Flight {{flight_info.id}}</h1>
+        <ul>
+            <li><b>Origin: </b>{{Flight.origin}}</li><br>
+            <li><b>Destination: </b>{{Flight.destination}}</li><br>
+            <li><b>Duration: </b>{{Flight.duration}}</li><br>
+        </ul>
+        <h2>Passengers  </h2>
+        <ul>
+            {% for p in Passengers %}
+                <li>{{p}}</li>
+                {% empty %}
+                <li>No Passengers</li>
+            {% endfor %}
+        </ul>
+        <h2>Not passengers for this flight:</h2>
+        <form method="POST" action="{% url 'flight_def' Flight.id%}">
+            {% csrf_token %}
+            <select name=add_p>
+                {% for p in Non_passengers %}
+                    <option value="{{p.id}}">{{p}}</option>
+                    {% empty %}
+                    <option>Everyone is in</option>
+                {% endfor %}
+            </select>
+            <button>Add</button>
+        </form>
+        <a href="{% url 'index' %}">Go to the flight list</a>
+    </body>
+</html>
